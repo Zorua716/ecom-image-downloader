@@ -101,6 +101,15 @@ src/
 
 新增电商平台时，在 `src/content/adapters/` 增加一个实现 `SiteAdapter` 接口的适配器，并在 `adapters/index.ts` 注册即可；同时把对应域名加入 `public/manifest.json` 的 `content_scripts.matches`。
 
+## 部署官网到 Cloudflare
+
+官网位于 `docs/`，是纯静态页面。仓库根目录的 `wrangler.jsonc` 已将 Cloudflare Workers 的静态资源目录指向 `./docs`。
+
+- Workers 方式：Build command 可留空或填 `exit 0`，Deploy command 保持 `npx wrangler deploy`。
+- Pages 方式：Framework preset 选 `None`，Build command 留空，Build output directory 填 `docs`。
+
+不要把扩展的 `dist/` 当作官网发布目录，`dist/` 是 Chrome 扩展构建产物。
+
 ## 已知限制
 
 - 页面需要登录、需要点击标签页才渲染、或通过 Canvas/WebGL 动态绘制的图片，无法通过 DOM 扫描获取。
