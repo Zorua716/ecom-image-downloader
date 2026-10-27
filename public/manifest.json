@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "电商图片提取下载助手",
+  "version": "1.0.0",
+  "description": "提取淘宝、京东、拼多多商家版商品详情页图片，预览并批量下载为 PNG 格式。",
+  "minimum_chrome_version": "111",
+  "permissions": ["storage", "downloads", "tabs"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.taobao.com/*",
+        "*://*.tmall.com/*",
+        "*://*.jd.com/*",
+        "*://*.yangkeduo.com/*",
+        "*://*.pinduoduo.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "电商图片提取下载助手"
+  }
+}

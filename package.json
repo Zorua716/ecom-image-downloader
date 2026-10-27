@@ -1,0 +1,25 @@
+{
+  "name": "ecom-image-downloader",
+  "version": "1.0.0",
+  "private": true,
+  "description": "电商图片提取下载助手：提取淘宝、京东、拼多多商家版商品详情页图片，预览并批量下载为 PNG。",
+  "type": "module",
+  "scripts": {
+    "clean": "node scripts/clean.mjs",
+    "build:background": "esbuild src/background/index.ts --bundle --format=esm --target=chrome111 --outfile=dist/background.js",
+    "build:content": "esbuild src/content/index.ts --bundle --format=iife --target=chrome111 --outfile=dist/content.js",
+    "build:gallery": "vite build",
+    "build": "npm run clean && npm run build:background && npm run build:content && npm run build:gallery",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.287",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "esbuild": "^0.24.2",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11"
+  }
+}
